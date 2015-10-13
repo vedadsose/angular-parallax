@@ -8,6 +8,7 @@ angular.module('angular-parallax', [
       parallaxRatio: '@',
       parallaxVerticalOffset: '@',
       parallaxHorizontalOffset: '@',
+      parallaxDirection: '@'
     },
     link: function($scope, elem, attrs) {
       var setPosition = function () {
@@ -16,6 +17,7 @@ angular.module('angular-parallax', [
         if (calcValY <= $window.innerHeight) {
           var topVal = (calcValY < $scope.parallaxVerticalOffset ? $scope.parallaxVerticalOffset : calcValY);
           var hozVal = ($scope.parallaxHorizontalOffset.indexOf("%") === -1 ? $scope.parallaxHorizontalOffset + 'px' : $scope.parallaxHorizontalOffset);
+          topVal *= $scope.parallaxDirection && $scope.parallaxDirection == 'top' ? -1 : 1;
           elem.css('transform', 'translate(' + hozVal + ', ' + topVal + 'px)');
         }
       };
